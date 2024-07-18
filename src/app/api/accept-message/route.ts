@@ -38,7 +38,7 @@ export async function POST(request:Request) {
             success:true,
             message:"message acceptance status updates successfully",
             updateUser
-        } , {status:500})
+        } , {status:200})
 
     } catch (error) {
         return Response.json({
@@ -64,7 +64,7 @@ export async function GET(request:Request) {
 
     const userId = user._id
     try {
-        const foundUser = await UserModel.findById(userId)
+        const foundUser = await UserModel.findById({userId})
     
         if(!foundUser){
             return Response.json({

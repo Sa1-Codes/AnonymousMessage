@@ -58,24 +58,21 @@ export async function POST(request:Request){
             })
 
             await newUser.save()
-
-            const emailResponse = await sendVerificationEmail(email ,username,verifyCode)
-
-            if(!emailResponse.success){
-                return Response.json({
-                    success:false,
-                    message:emailResponse.message
-                },{status:500})
-            }
-
-
-            return Response.json({
-                success:true,
-                message:"user registered successfully , please verify your email"
-            },{status:201})
-
-
         }
+        const emailResponse = await sendVerificationEmail(email ,username,verifyCode)
+
+        if(!emailResponse.success){
+            return Response.json({
+                success:false,
+                message:emailResponse.message
+            },{status:500})
+        }
+
+
+        return Response.json({
+            success:true,
+            message:"user registered successfully , please verify your email"
+        },{status:201})
 
     } catch (error) {
         console.error("Error while registering the user in sign-up route", error)
