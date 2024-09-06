@@ -37,7 +37,7 @@ function MessageCards({message , onMessageDelete}:MessageCardProps) {
     const {toast} = useToast()
     const handleDeleteConfirm = async () => {
         try {
-            const response = await axios.delete<ApiResponse>(`/api/delete-message/${message._id}`)
+            const response = await axios.delete<ApiResponse>(`/api/delete-messages/${message._id}`)
             toast({
                 title:response.data.message
             })
@@ -54,22 +54,24 @@ function MessageCards({message , onMessageDelete}:MessageCardProps) {
             });
         }
     }
-    
+    const date = new Date(message.createdAt);
+    const formattedDate = date.toDateString();
+    const formattedTime = date.toLocaleTimeString();
 
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Card Title</CardTitle>
+                <CardTitle>{message?.content}</CardTitle>
                 <AlertDialog>
                     <AlertDialogTrigger asChild>
-                        <Button variant="outline"><X className='w-5 h-5'/></Button>
+                        <Button variant="destructive" className="w-12 flex justify-end dark:bg-red-700"><X className='w-5 h-5'/></Button>
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                         <AlertDialogHeader>
                             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                             <AlertDialogDescription>
                                 This action cannot be undone. This will permanently delete your
-                                account and remove your data from our servers.
+                                message and remove your data from our servers.
                             </AlertDialogDescription>
                             </AlertDialogHeader>
                         <AlertDialogFooter>
@@ -78,7 +80,7 @@ function MessageCards({message , onMessageDelete}:MessageCardProps) {
                         </AlertDialogFooter>
                     </AlertDialogContent>
                 </AlertDialog>
-                <CardDescription>Card Description</CardDescription>
+                <CardDescription>{formattedDate}, {formattedTime}</CardDescription>
             </CardHeader>
             <CardContent> 
             </CardContent>

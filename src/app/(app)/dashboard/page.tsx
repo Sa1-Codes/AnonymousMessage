@@ -39,7 +39,7 @@ function Page() {
     const fetchAcceptMessge = useCallback(async ()=>{
         setIsSwitchLoading(true);
         try {
-            const response = await axios.get<ApiResponse>('/api/accept-messages')
+            const response = await axios.get<ApiResponse>('/api/accept-message')
             setValue("acceptMessages" , response.data.isAcceptingMessages)
 
 
@@ -139,7 +139,7 @@ function Page() {
             <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
 
             <div className="mb-4">
-                <h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>{' '}
+                <h2 className="text-lg font-semibold mb-2">Copy and Share Your Unique Link to Recieve Messages</h2>{' '}
                 <div className="flex items-center">
                 <input
                     type="text"

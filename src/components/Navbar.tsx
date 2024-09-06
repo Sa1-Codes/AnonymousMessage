@@ -5,11 +5,15 @@ import Link from 'next/link'
 import { useSession , signOut} from 'next-auth/react'
 import {User} from 'next-auth'
 import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 
 
 function Navbar() {
     const {data:session} = useSession()
     const user:User = session?.user as User
+    // const router = useRouter()
+    const pathName = usePathname()
 
 
     return (
@@ -19,17 +23,29 @@ function Navbar() {
                 {
                     session?(
                         <>
-                            <span className="mr-4">Welcome, {user?.username || user?.email}</span>
+                        <div className='flex flex-row gap-1 items-center'>
+                            <span className="mr-4">Welcome, <span className='text-xl font-bold'>{user?.username || user?.email}</span></span>
+                            <div className='flex flex-row gap-1'>
+                            {
+                                pathName=='/dashboard'?(<Link href={'/'}><Button className="w-full md:w-auto bg-slate-100 text-black" variant='outline'>Home</Button></Link>) :
+                                (<Link href={'/dashboard'}><Button className="w-full md:w-auto bg-slate-100 text-black" variant='outline'>Dashboard</Button></Link>)
+                            
+                            }
+
+                            
                             <Button className="w-full md:w-auto bg-slate-100 text-black" variant='outline' onClick={()=>signOut()}>Logout</Button>
+                            </div>
+                        </div>
                         </>
                     ):(
                         <>
-                        <Link href='/sign-in'>
-                            <Button className="w-full md:w-auto bg-slate-100 text-black" variant={'outline'}>Login</Button>
-                        </Link>
                         <Link href='/sign-up'>
-                            <Button className="w-full md:w-auto bg-slate-100 text-black" variant={'outline'}>Sign Up</Button>
+                            <Button className=" bg-slate-100 text-black" variant={'outline'}>Sign Up</Button>
                         </Link>
+                        <Link href='/sign-in'>
+                            <Button className=" bg-slate-100 text-black" variant={'outline'}>Login</Button>
+                        </Link>
+                        
                         </>
                         
                         

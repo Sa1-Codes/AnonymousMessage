@@ -53,7 +53,7 @@ export async function GET(request:Request) {
     await dbConnect();
 
     const session = await getServerSession(authOptions)
-    const user:User = session?.user as User
+    const user = session?.user as User
 
     if(!session || !session.user){
         return Response.json({
@@ -64,7 +64,7 @@ export async function GET(request:Request) {
 
     const userId = user._id
     try {
-        const foundUser = await UserModel.findById({userId})
+        const foundUser = await UserModel.findById(userId)
     
         if(!foundUser){
             return Response.json({
