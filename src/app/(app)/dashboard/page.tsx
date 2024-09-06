@@ -117,7 +117,7 @@ function Page() {
         }
     }
     if (!session || !session.user) {
-        return <div>Session not present</div>;
+        return <div className='text-center'>Please Login Again</div>;
       }
 
     const {username} = session?.user as User
@@ -182,7 +182,7 @@ function Page() {
                 {messages.length > 0 ? (
                 messages.map((message, index) => (
                     <MessageCards
-                        // key={message._id}
+                        key={message._id as string}
                         message={message}
                         onMessageDelete={handleDeleteMessage}
                     />

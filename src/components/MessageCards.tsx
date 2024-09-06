@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import {
     Card,
@@ -40,7 +41,7 @@ function MessageCards({message , onMessageDelete}:MessageCardProps) {
             toast({
                 title:response.data.message
             })
-            onMessageDelete(message._id);
+            onMessageDelete(message._id as string);
 
             
         } catch (error) {

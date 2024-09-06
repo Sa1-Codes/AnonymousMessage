@@ -52,10 +52,10 @@ export async function GET(request:Request) {
 
     } catch (error) {
         console.log("error in fetching the messages for get-messages route",error)
-        // return Response.json({
-        //     success:false,
-        //     message:"Error in fetching the messages",error
-        // } , {status:401})
+        return Response.json({
+            success:false,
+            message:"Error in fetching the messages",error
+        } , {status:401})
     }
 
 }
