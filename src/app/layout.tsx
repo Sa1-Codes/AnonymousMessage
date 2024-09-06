@@ -9,7 +9,7 @@ import { authOptions } from './api/auth/[...nextauth]/options';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'True Feedback',
+  title: 'Anonymous Message',
   description: 'Real feedback from real people.',
 };
 
