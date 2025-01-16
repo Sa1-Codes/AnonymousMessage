@@ -21,6 +21,8 @@ function Page() {
     const [messages , setMessages] = useState<Message[]>([])
     const [isLoading , setisLoading] = useState(false)
     const [isSwitchLoading , setIsSwitchLoading] = useState(false)
+    const [isVerified, setIsVerified] = useState(false);
+
     const {toast} = useToast()
 
     const handleDeleteMessage = (messageId: string) => {
@@ -147,7 +149,6 @@ function Page() {
         })
     }
 
-    const [isVerified, setIsVerified] = useState(false);
 
     const getUser = async () => {
         try {
