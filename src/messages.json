@@ -13,5 +13,10 @@
       "title": "Message from MysteryGuest",
       "content": "Do you have any book recommendations?",
       "received": "1 day ago"
+    },
+    {
+      "title": "Message from Admin",
+      "content": "Welcome to Anonymous Message",
+      "received": "Few minutes ago"
     }
   ]

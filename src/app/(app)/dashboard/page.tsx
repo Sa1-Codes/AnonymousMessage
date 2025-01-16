@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button'
 import { Loader2, RefreshCcw } from 'lucide-react'
 import MessageCards from '@/components/MessageCards'
 import { User } from 'next-auth'
+import Link from 'next/link'
 
 
 function Page() {
@@ -94,6 +95,7 @@ function Page() {
 
     },[session, setValue, fetchAcceptMessge ,fetchMessages])
 
+
     //handle switch change
 
     const handleSwitchChange = async ()=>{
@@ -117,7 +119,19 @@ function Page() {
         }
     }
     if (!session || !session.user) {
-        return <div className='text-center'>Please Login Again</div>;
+        return <div className='flex-grow flex flex-col items-center justify-center px-4 md:px-24 py-12 bg-gray-600 text-white'>
+            <section className="text-center mb-8 md:mb-12">
+            <h1 className="text-3xl md:text-5xl font-bold">
+                Welcome
+            </h1>
+            <p className="mt-3 md:mt-4 text-base md:text-lg">
+                Anonymous Message - Where your identity remains a secret.
+            </p>
+            </section>
+            <h1 className="text-3xl md:text-5xl font-bold">
+                Please Sign-In
+            </h1>
+        </div>;
       }
 
     const {username} = session?.user as User
@@ -132,6 +146,27 @@ function Page() {
             description:"Profile URL has been copied to clipboard"
         })
     }
+
+    const [isVerified, setIsVerified] = useState(false);
+
+    const getUser = async () => {
+        try {
+            const response = await axios.post('/api/get-user', {username:username})
+            // console.log(response);
+            setIsVerified(response.data.user.isVerified)
+            // console.log(isVerified)
+            
+
+        } catch (error) {
+            const axiosError = error as AxiosError<ApiResponse>
+            toast({
+                title:"Error",
+                description:axiosError.response?.data.message || "failed to get Verification Status",
+                variant:"destructive"
+            })
+        }
+    }
+    getUser();
 
 
     return (
@@ -190,6 +225,18 @@ function Page() {
                 ) : (
                 <p>No messages to display.</p>
                 )}
+            </div>
+            <div className='mt-4 mb-4'></div>
+            <Separator />
+            <div className="mt-4 gap-6">
+            {
+                !isVerified? (
+                    <div>
+                        <h3 className=''>Your Email Address is Not Verified...</h3>
+                        <Link href={`${baseUrl}/verify/${username}`} className='hover:underline'>Please verify Email</Link>
+                    </div>
+                ) : ("")
+            }
             </div>
     </div>
     )

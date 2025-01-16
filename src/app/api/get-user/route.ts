@@ -8,10 +8,13 @@ const UsernameQuerySchema = z.object({
     username:usernameValidation
 })
 
-export async function GET(request:Request) {
+export async function POST(request:Request) {
     await dbConnect();
 
     try {
+
+        const {username} = await request.json()
+
         
         const {searchParams} = new URL(request.url)
         const queryParam = {
@@ -23,29 +26,30 @@ export async function GET(request:Request) {
         const result = UsernameQuerySchema.safeParse(queryParam)
         console.log(result)
 
-        if (!result.success) {
-            const usernameErrors = result.error.format().username?._errors  || []
-            return Response.json({
-                success:false,
-                message: usernameErrors?.length > 0 ? usernameErrors.join(', ') : "invalid query parameters"
-            },{status:400})
-        }
+        // if (!result.success) {
+        //     const usernameErrors = result.error.format().username?._errors  || []
+        //     return Response.json({
+        //         success:false,
+        //         message: usernameErrors?.length > 0 ? usernameErrors.join(', ') : "invalid query parameters"
+        //     },{status:400})
+        // }
 
-        const {username} = result.data
+        // const {username} = result.data
 
-        const existingVerifiedUser = await UserModel.findOne({
-            username,isVerified:true
+        const user = await UserModel.findOne({
+            username
         })
 
 
-        if(existingVerifiedUser){
+        if(!user){
             return Response.json({
                 success:false,
-                message: "Username already exist"
-            },{status:400})
+                message:"user not found"
+            },{status:404})
         }
 
         return Response.json({
+            user,
             success:true,
             message:"username is available" 
         },{status:200})

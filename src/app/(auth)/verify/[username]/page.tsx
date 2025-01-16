@@ -73,6 +73,9 @@ function VerifyAccount() {
                         />
                         <Button type="submit">Submit</Button>
                     </form>
+                    <div className='text-center'>
+                        <a href="/sign-in">Sign-In</a>
+                    </div>
                 </Form>
             </div>
         </div>

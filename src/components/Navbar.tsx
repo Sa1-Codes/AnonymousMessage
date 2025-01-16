@@ -39,12 +39,14 @@ function Navbar() {
                         </>
                     ):(
                         <>
-                        <Link href='/sign-up'>
-                            <Button className=" bg-slate-100 text-black" variant={'outline'}>Sign Up</Button>
-                        </Link>
-                        <Link href='/sign-in'>
-                            <Button className=" bg-slate-100 text-black" variant={'outline'}>Login</Button>
-                        </Link>
+                        <div className='flex flex-row gap-1 items-center'>
+                            <Link href='/sign-up'>
+                                <Button className=" bg-slate-100 text-black" variant={'outline'}>Sign Up</Button>
+                            </Link>
+                            <Link href='/sign-in'>
+                                <Button className=" bg-slate-100 text-black" variant={'outline'}>Login</Button>
+                            </Link>
+                        </div>
                         
                         </>
                         

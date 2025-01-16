@@ -37,11 +37,11 @@ export async function GET(request:Request) {
                 $group : {_id: "$_id" , messages : {$push:"$messages"}}
             }
         ]) 
-
+        console.log(user)
         if(!user || user.length===0){
             return Response.json({
                 success:false,
-                message:"user not found"
+                message:"messages not found"
             } , {status:401})
         }
 
