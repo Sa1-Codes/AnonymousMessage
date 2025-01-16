@@ -39,7 +39,7 @@ export async function DELETE(request:Request , {params}:{params:{messageid:strin
 
 
     } catch (error) {
-        console.log("error in delete message route", error)
+        // console.log("error in delete message route", error)
         return Response.json({
             success:false,
             message:"Error while deleting message"

@@ -23,7 +23,7 @@ export async function POST(request:Request){
         const existingUserByEmail = await UserModel.findOne({
             email
         })
-        
+
 
         const verifyCode = Math.floor(Math.random()*900000 + 100000).toString()
 
@@ -76,7 +76,7 @@ export async function POST(request:Request){
         },{status:201})
 
     } catch (error) {
-        console.error("Error while registering the user in sign-up route", error)
+        // console.error("Error while registering the user in sign-up route", error)
         return Response.json({
             success:false,
             message:"Error while registering user"

@@ -106,7 +106,7 @@ export default function SendMessage() {
     try {
       complete('');
     } catch (error) {
-      console.error('Error fetching messages:', error);
+      // console.error('Error fetching messages:', error);
       // Handle error appropriately
     }
   };

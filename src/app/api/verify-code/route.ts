@@ -50,7 +50,7 @@ export async function POST(request:Request) {
         }
          
     } catch (error) {
-        console.log("error while verify user",error)
+        // console.log("error while verify user",error)
         return Response.json({
             success:false,
             message:"error verifying user"

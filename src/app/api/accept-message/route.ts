@@ -79,7 +79,7 @@ export async function GET(request:Request) {
             
         } , {status:200})
     } catch (error) {
-        console.log("error while finding the user" , error)
+        // console.log("error while finding the user" , error)
         return Response.json({
             success:false,
             message:"error in getting the message acceptance status"

@@ -37,7 +37,7 @@ export async function GET(request:Request) {
                 $group : {_id: "$_id" , messages : {$push:"$messages"}}
             }
         ]) 
-        console.log(user)
+        // console.log(user)
         if(!user || user.length===0){
             return Response.json({
                 success:false,
@@ -51,7 +51,7 @@ export async function GET(request:Request) {
         } , {status:200})
 
     } catch (error) {
-        console.log("error in fetching the messages for get-messages route",error)
+        // console.log("error in fetching the messages for get-messages route",error)
         return Response.json({
             success:false,
             message:"Error in fetching the messages",error
